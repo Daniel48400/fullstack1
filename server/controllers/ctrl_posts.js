@@ -4,8 +4,8 @@ const Post = require ('../models/Post')
 exports.getAllPosts =  async (req,res) => {
     try {
         let posts = await Post.find()
-        return res.json({ data: posts})
-        res.send(posts.toArray())
+        return res.json(posts)
+       
     }catch(err){
         return res.status(500).json({message: 'dataBase Error', error: err})
     }

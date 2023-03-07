@@ -12,6 +12,17 @@ app.use(express.urlencoded ({extended: true}))
 const posts_router = require ('./routes/road_posts')
 app.use('/posts', posts_router)
 
+// handle production
+    if(process.env.NODE_ENV ==='production') {
+        // static folder
+        app.use(express.static(__dirname + '/public/'))
+
+        // handle SPA
+        app.get(/.*/, (req, res) => {
+            res.sendFile(__dirname + '/public/index.html')
+
+        })
+    }
 
 mongoose
     .set('strictQuery', true)
